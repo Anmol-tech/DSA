@@ -9,7 +9,7 @@ public class Main {
         numbers.insert(3);
         numbers.insert(5);
         numbers.insert(4);
-//        numbers.removeAt(0);
+        numbers.removeAt(0);
         numbers.print();
         System.out.println(numbers.indexOf(21));
         

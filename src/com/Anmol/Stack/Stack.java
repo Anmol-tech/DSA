@@ -6,28 +6,34 @@ public class Stack {
     private int top;
     private int[] stack;
     private int size;
+
     public Stack(int length) {
         stack = new int[length];
-        top = -1;
-        size = length;
+        top = 0;
     }
+
     public void push(int element){
-        top++;
-        if(top >=size)
+        if(top >= stack.length)
             throw new StackOverflowError();
         stack[top] = element;
+        top++;
     }
-    public void pop(){
-        peek();
-        top--;
-    }
-    public void peek(){
-        if(top<=-1)
+
+    public int pop(){
+        if (top==0)
             throw new EmptyStackException();
-        System.out.println(stack[top]);
+        top--;
+        return stack[top];
     }
+
+    public int peek(){
+        if(top == 0)
+            throw new EmptyStackException();
+        return stack[top];
+    }
+
     public boolean isEmpty(){
-        return top <=-1;
+        return top == 0;
     }
 
 }
