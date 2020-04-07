@@ -6,28 +6,29 @@ import java.util.Stack;
 public class QueueUsingStack {
     private Stack<Integer> stackPush = new Stack<>();
     private Stack<Integer> stackPop = new Stack<>();
-    private int count = 0;
-    private int length;
-
-    public QueueUsingStack(int length) {
-        this.length = length;
-    }
 
     public void enqueue(int item) {
-        if (length == count)
-            throw new IllegalStateException();
         stackPush.push(item);
-        count++;
     }
 
     public int dequeue() {
-        if (count == 0)
+        if (stackPush.isEmpty() && stackPop.isEmpty())
             throw new IllegalStateException();
+        MoveStackPushToStackPop();
+        return stackPop.pop();
+    }
+
+    public int peek() {
+        if (isEmpty())
+            throw new IllegalStateException();
+        MoveStackPushToStackPop();
+        return stackPop.peek();
+    }
+
+    private void MoveStackPushToStackPop() {
         if (stackPop.isEmpty())
             while (!stackPush.isEmpty())
                 stackPop.push((stackPush.pop()));
-        count--;
-        return stackPop.pop();
     }
 
     @Override
@@ -35,4 +36,7 @@ public class QueueUsingStack {
         return (stackPush.toString().replace("]", "") + ", " + stackPop.toString().replace("[", ""));
     }
 
+    public boolean isEmpty() {
+        return stackPush.isEmpty() && stackPop.isEmpty();
+    }
 }
