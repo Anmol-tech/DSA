@@ -6,16 +6,12 @@ import java.util.Stack;
 public class Main {
 
     public static void main(String[] args) {
-        QueueUsingStack queue = new QueueUsingStack();
-        queue.enqueue(5);
+        PriorityQueue queue = new PriorityQueue(5);
+        queue.enqueue(2);
         queue.enqueue(6);
-        queue.enqueue(7);
-        queue.enqueue(8);
-        queue.dequeue();
-        queue.enqueue(100);
-        queue.dequeue();
-        System.out.println(queue.peek());
-        System.out.println(queue);
+        queue.enqueue(5);
+        int front = queue.dequeue();
+        System.out.println(front);
     }
     public static void reverse(Queue<Integer> queue){
         Stack<Integer> stack = new Stack<>();
