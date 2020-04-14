@@ -1,69 +1,78 @@
 package com.Anmol.HashTable;
 
 
+import java.util.LinkedList;
+
 public class HashTable {
 
-    private static class KeyValuePair {
+    private static class Entry {
         int key;
         String value;
-        KeyValuePair next;
-
-        @Override
-        public String toString() {
-            return key + "=" + value;
+        public Entry(int key, String value) {
+            this.key = key;
+            this.value = value;
         }
+
     }
 
-    KeyValuePair[] pair;
+    LinkedList<Entry>[] entries ;
+
 
     public HashTable(int length) {
-        pair = new KeyValuePair[length];
-        addressInitializer();
+        this.entries = new LinkedList[length];
     }
 
-    public void addressInitializer() {
-        for (int i = 0; i < pair.length; i++) {
-            pair[i] = new KeyValuePair();
+    public void put(int key, String value) {
+
+        var entry = getEntry(key);
+        if (entry != null) {
+            entry.value = value;
+            return;
         }
+
+        var bucket = getOrCreteBucket(key);
+        bucket.add(new Entry(key, value));
     }
 
-    public void remove(int k) {
-        if (pair[hash(k)] == null)
-            throw new EmptyMapException();
-
-        KeyValuePair current = pair[hash(k)];
-        while (current.next.next != null)
-            current = current.next;
-        current.value = "";
+    public String get(int key){
+        return (entries[hash(key)] == null) ? null : getEntry(key).value;
     }
 
-    public int hash(int k) {
-        return k % pair.length;
-    }
-
-    public void put(int k, String v) {
-        KeyValuePair current = pair[hash(k)];
-        if (pair[hash(k)] == null) {
-            current.key = k;
-            current.value = v;
-        } else {
-            while (current.next != null)
-                current = current.next;
-            current.value = v;
-            current.key = k;
+    public void remove(int key){
+        var bucket = getBucket(key);
+        if (bucket !=null){
+            var entry = getEntry(key);
+            bucket.remove(entry);
+            return;
         }
+        throw new EmptyKeyException();
     }
 
-    public KeyValuePair get(int k) {
-        if (pair[hash(k)].key == 0)
-            throw new EmptyMapException();
+    private LinkedList<Entry> getBucket(int key){
+        return entries[hash(key)];
+    }
 
-        KeyValuePair current = pair[hash(k)];
-        while (current.next != null) {
-            current = current.next;
+    private Entry getEntry(int key){
+        var bucket = getBucket(key);
+        if(bucket != null) {
+            for (var entry : bucket)
+                if (entry.key == key) {
+                    return entry;
+                }
         }
-        return current;
+        return null;
     }
 
-
+    private LinkedList<Entry> getOrCreteBucket(int key){
+        var index = hash(key);
+        if (entries[index] == null){
+            entries[index] = new LinkedList<Entry>();
+            return entries[index];
+        }
+        return entries[index];
+    }
+    private int hash(int key){
+        key = Math.abs(key);
+        return key % entries.length;
+    }
 }
