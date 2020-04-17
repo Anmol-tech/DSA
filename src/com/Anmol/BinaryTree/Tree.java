@@ -64,7 +64,7 @@ public class Tree {
         if(root == null)
             return;
 
-        System.out.println(root.value);
+        System.out.print(root.value + " ");
         traversalPreOrder(root.left);
         traversalPreOrder(root.right);
     }
@@ -77,7 +77,7 @@ public class Tree {
             return;
 
         traversalPreOrder(root.left);
-        System.out.println(root.value);
+        System.out.print(root.value + " ");
         traversalPreOrder(root.right);
     }
 
@@ -90,7 +90,7 @@ public class Tree {
 
         traversalPreOrder(root.left);
         traversalPreOrder(root.right);
-        System.out.println(root.value);
+        System.out.print(root.value + " ");
     }
 }
 

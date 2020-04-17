@@ -9,6 +9,11 @@ public class Main {
         tree.insert(7);
         tree.insert(10);
         tree.insert(11);
-        System.out.println(tree.find(4));
+        tree.traversalPreOrder();
+        System.out.println();
+        tree.traversalInOrder();
+        System.out.println();
+        tree.traversalPostOrder();
+//        System.out.println(tree.find(4));
     }
 }
