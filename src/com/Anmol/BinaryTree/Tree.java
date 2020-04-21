@@ -92,5 +92,57 @@ public class Tree {
         traversalPreOrder(root.right);
         System.out.print(root.value + " ");
     }
+
+    public boolean equals(Tree other){
+        return equals(root,other.root);
+    }
+    private boolean equals(Node first, Node second){
+        if (first == null && second == null)
+            return true;
+        if (first != null && second != null)
+            return first.value == second.value &&
+                    equals(first.left, second.left) &&
+                    equals(first.right, second.right);
+        return false;
+    }
+
+    // for Binary Tree
+    public int min() {
+        var current = root;
+        if (current == null)
+            return -1;
+        while (current.left != null)
+            current = current.left;
+        return current.value;
+    }
+
+    public int height(){
+        return height(root);
+    }
+    private int height(Node root){
+        if (root.left == null && root.right == null)
+            return 0;
+
+        return 1+ Math.max(
+                height(root.left),
+                height(root.right));
+    }
+//    For any tree
+    public int minValue(){
+        return min(root);
+    }
+    private int min(Node root){
+        if (root == null)
+            return Integer.MAX_VALUE;
+
+        if(root.left == null && root.right == null)
+            return root.value;
+
+        var left = min(root.left);
+        var right = min(root.right);
+
+        return Math.min(Math.min(left,right),root.value);
+    }
+
 }
 
