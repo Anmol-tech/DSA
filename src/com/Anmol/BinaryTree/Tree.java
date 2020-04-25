@@ -94,6 +94,8 @@ public class Tree {
     }
 
     public boolean equals(Tree other){
+        if (other == null)
+            return false;
         return equals(root,other.root);
     }
     private boolean equals(Node first, Node second){
@@ -120,6 +122,8 @@ public class Tree {
         return height(root);
     }
     private int height(Node root){
+        if (root == null)
+            return 0;
         if (root.left == null && root.right == null)
             return 0;
 
@@ -127,7 +131,8 @@ public class Tree {
                 height(root.left),
                 height(root.right));
     }
-//    For any tree
+
+    //    For any tree
     public int minValue(){
         return min(root);
     }
@@ -142,6 +147,46 @@ public class Tree {
         var right = min(root.right);
 
         return Math.min(Math.min(left,right),root.value);
+    }
+
+    public void swapRoot(){
+        var temp = root.left;
+        root.left = root.right;
+        root.right = root.left;
+    }
+    public boolean checkBinary(){
+        return checkBinary(root,
+                Integer.MIN_VALUE,
+                Integer.MAX_VALUE);
+    }
+    private boolean checkBinary(Node root, int min, int max){
+        if(root == null)
+            return true;
+        if(root.value < min || root.value > max)
+            return false;
+
+        return
+                checkBinary(root.left,min,root.value+1)
+                && checkBinary(root.right,root.value+1,max);
+
+    }
+
+    public void printAtDistance(int distance){
+        printAtDistance(root,distance);
+    }
+    private void printAtDistance(Node root,int distance){
+        if (root == null)
+            return;
+
+        if(distance == 0){
+            System.out.println(root.value);
+        }
+        printAtDistance(root.left,distance-1);
+        printAtDistance(root.right,distance-1);
+    }
+    public void orderTraversal(){
+        for (var i = 0;i<=height();i++)
+            printAtDistance(i);
     }
 
 }
