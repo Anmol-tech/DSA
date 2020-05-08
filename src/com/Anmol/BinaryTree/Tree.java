@@ -154,6 +154,7 @@ public class Tree {
         root.left = root.right;
         root.right = root.left;
     }
+
     public boolean checkBinary(){
         return checkBinary(root,
                 Integer.MIN_VALUE,
@@ -184,6 +185,7 @@ public class Tree {
         printAtDistance(root.left,distance-1);
         printAtDistance(root.right,distance-1);
     }
+
     public void orderTraversal(){
         for (var i = 0;i<=height();i++)
             printAtDistance(i);
