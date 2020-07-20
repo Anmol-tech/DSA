@@ -12,7 +12,6 @@ public class Main {
     queue.enqueue(40);
     queue.enqueue(30);
     queue.dequeue();
-    var value = queue.peek();
     System.out.println(queue.size());
   }
 

@@ -1,7 +1,6 @@
 package com.Anmol.Stack;
 
 import java.util.Arrays;
-import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
 

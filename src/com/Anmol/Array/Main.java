@@ -2,8 +2,8 @@ package com.Anmol.Array;
 
 public class Main {
 
-    public static void main(String[] args) {
-        Array numbers = new Array(2);
+    public static void main(final String[] args) {
+        final Array numbers = new Array(2);
         numbers.insert(1);
         numbers.insert(2);
         numbers.insert(3);

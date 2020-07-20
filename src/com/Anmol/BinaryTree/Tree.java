@@ -150,7 +150,6 @@ public class Tree {
     }
 
     public void swapRoot(){
-        var temp = root.left;
         root.left = root.right;
         root.right = root.left;
     }

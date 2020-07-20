@@ -5,8 +5,7 @@ import java.util.EmptyStackException;
 public class Stack {
     private int top;
     private int[] stack;
-    private int size;
-
+    
     public Stack(int length) {
         stack = new int[length];
         top = 0;

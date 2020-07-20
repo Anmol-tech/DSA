@@ -20,8 +20,7 @@ public class Array {
         counter++;
     }
     public void removeAt(int index){
-        int removeItem = array[index];
-        if (counter - 1 - index >= 0){
+        if (counter - 1 - index >= 0) {
             System.arraycopy(array, index + 1, array, index, counter - 1 - index);
             array = Arrays.copyOf(array,counter-1);
         }
